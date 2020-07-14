@@ -10,6 +10,7 @@ services:
       - /usr/src/app/node_modules
     ports:
       - ${SERVER_PORT}:${SERVER_PORT}
+    restart: on-failure
     command: npm run start:dev
     env_file:
       - .env
