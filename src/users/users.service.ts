@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Users } from './user.entity';
+import { User } from './user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
@@ -8,8 +8,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 @Injectable()
 export class UsersService {
   constructor(
-    @InjectRepository(Users)
-    private usersRepository: Repository<Users>,
+    @InjectRepository(User)
+    private usersRepository: Repository<User>,
   ) {}
 
   getUsers() {
@@ -23,6 +23,8 @@ export class UsersService {
     }
     throw new HttpException('User not found', HttpStatus.NOT_FOUND);
   }
+
+  getUserByEmail(email: string) {}
 
   async createUser(user: CreateUserDto) {
     const newUser = await this.usersRepository.create(user);

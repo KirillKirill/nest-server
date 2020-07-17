@@ -25,6 +25,11 @@ export class UsersController {
     return this.usersService.getUserById(Number(id));
   }
 
+  @Get()
+  getUserByEmail(email: string) {
+    return this.usersService.getUserByEmail(email);
+  }
+
   @Post()
   async createUser(@Body() user: CreateUserDto) {
     return this.usersService.createUser(user);
