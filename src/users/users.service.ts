@@ -24,7 +24,16 @@ export class UsersService {
     throw new HttpException('User not found', HttpStatus.NOT_FOUND);
   }
 
-  getUserByEmail(email: string) {}
+  async getUserByEmail(email: string) {
+    const user = await this.usersRepository.findOne({ email });
+    if (user) {
+      return user;
+    }
+    throw new HttpException(
+      'User with this email does not exist',
+      HttpStatus.NOT_FOUND,
+    );
+  }
 
   async createUser(user: CreateUserDto) {
     const newUser = await this.usersRepository.create(user);
