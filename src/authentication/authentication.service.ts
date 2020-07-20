@@ -14,15 +14,15 @@ export class AuthenticationService {
     private readonly configService: ConfigService,
   ) {}
 
-  public async register(registrationData: RegisterDto) {
+  async register(registrationData: RegisterDto) {
     const hashedPassword = await bcrypt.hash(registrationData.password, 10);
     try {
-      const createdUser = await this.usersService.createUser({
+      return await this.usersService.createUser({
         ...registrationData,
         password: hashedPassword,
       });
-      createdUser.password = undefined;
-      return createdUser;
+      // createdUser.password = undefined;
+      // return createdUser;
     } catch (error) {
       if (error?.code === '23505') {
         throw new HttpException(
