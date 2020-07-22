@@ -20,9 +20,8 @@ export class AuthenticationService {
       return await this.usersService.createUser({
         ...registrationData,
         password: hashedPassword,
+        role: 'user',
       });
-      // createdUser.password = undefined;
-      // return createdUser;
     } catch (error) {
       if (error?.code === '23505') {
         throw new HttpException(
@@ -39,10 +38,10 @@ export class AuthenticationService {
 
   public getCookieWithJwtToken(userId: number) {
     const payload: TokenPayload = { userId };
-    const token = this.jwtService.sign(payload);
-    return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${this.configService.get(
-      'JWT_EXPIRATION_TIME',
-    )}}`;
+    return this.jwtService.sign(payload);
+    // return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${this.configService.get(
+    //   'JWT_EXPIRATION_TIME',
+    // )}}`;
   }
 
   public getCookieForLogOut() {

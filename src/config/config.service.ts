@@ -38,6 +38,7 @@ class ConfigService {
         migrationsDir: 'src/migration',
       },
       keepConnectionAlive: true,
+      synchronize: true,
     };
   }
 }
