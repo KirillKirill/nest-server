@@ -30,8 +30,12 @@ export class AuthenticationController {
   @Post('login')
   async logIn(@Req() request: RequestWithUser) {
     const { user } = request;
-    const token = this.authenticationService.getCookieWithJwtToken(user.id);
-    //request.res.setHeader('Set-Cookie', cookie);
+    const cookie = this.authenticationService.getCookieWithJwtToken(
+      user.id,
+      user.role,
+    );
+    request.res.setHeader('Set-Cookie', cookie);
+    const token = this.authenticationService.signJwtToken(user.id, user.role);
     return { ...user, token };
   }
 
