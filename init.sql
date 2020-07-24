@@ -1,7 +1,14 @@
-CREATE TABLE public.users (
-    id int PRIMARY KEY,
-    username varchar(255) NOT NULL,
-    email varchar (255) NOT NULL,
-    password varchar (255) NOT NULL,
+CREATE TABLE persons (
+    id SERIAL PRIMARY KEY,
+    username text NOT NULL,
+    email text NOT NULL,
+    password text NOT NULL,
     role text NOT NULL
+);
+
+INSERT INTO persons( username, email, password, role) VALUES(
+    'Admin',
+    'admin@dashbouquet.com',
+    'admin123',
+    'admin'
 );
