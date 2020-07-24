@@ -11,18 +11,23 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 
-@Controller()
+@Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
-  @Get('users')
+  @Get('getUsers')
   getUsers() {
     return this.usersService.getUsers();
   }
 
-  @Get('user/:id')
+  @Get('getUser/:id')
   getUserById(@Param('id') id: string) {
     return this.usersService.getUserById(Number(id));
+  }
+
+  @Get()
+  getUserByEmail(email: string) {
+    return this.usersService.getUserByEmail(email);
   }
 
   @Post()
