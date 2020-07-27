@@ -16,7 +16,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         database: configService.get('POSTGRES_DB'),
         entities: [__dirname + '/../**/*.entity{.ts,.js}'],
         keepConnectionAlive: true,
-        synchronize: true,
       }),
     }),
   ],

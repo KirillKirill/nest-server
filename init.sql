@@ -1,4 +1,4 @@
-CREATE TABLE persons (
+CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username text NOT NULL,
     email text NOT NULL,
@@ -6,9 +6,9 @@ CREATE TABLE persons (
     role text NOT NULL
 );
 
-INSERT INTO persons( username, email, password, role) VALUES(
+INSERT INTO users( username, email, password, role) VALUES(
     'Admin',
-    'admin@dashbouquet.com',
+    'admin@gmail.com',
     'admin123',
     'admin'
 );
