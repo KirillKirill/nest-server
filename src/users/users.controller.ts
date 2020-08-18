@@ -5,11 +5,12 @@ import {
   Put,
   Delete,
   Body,
-  Param,
+  Param, UseFilters,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { UpdateUserDto } from './dto/update-user.dto';
+import {BadRequestExceptionFilter} from "../exceptionFilter/badRequestExceptionFilter";
 
 @Controller('users')
 export class UsersController {
@@ -35,6 +36,7 @@ export class UsersController {
     return this.usersService.createUser(user);
   }
 
+  @UseFilters(new BadRequestExceptionFilter())
   @Put('user/:id')
   async updateUser(@Param('id') id: string, @Body() user: UpdateUserDto) {
     return await this.usersService.updateUser(Number(id), user);
